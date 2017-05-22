@@ -15,7 +15,7 @@ go test
 
 ## Docker
 
-[Drone CLI](http://readme.drone.io/usage/getting-started-cli/) is required.
+[Drone CLI](http://docs.drone.io/cli-installation/) is required.
 
 Build the docker image with the following commands:
 
