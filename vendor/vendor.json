@@ -1,0 +1,157 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"path": "github.com/Sirupsen/logrus",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "LBSBvc68H0Za9OSZ0gli7Hf/tVM=",
+			"path": "github.com/buger/jsonparser",
+			"revision": "016ea00d7ed52c8acc470d90b03d2e6c13516814",
+			"revisionTime": "2017-03-25T17:55:28Z"
+		},
+		{
+			"path": "github.com/codegangsta/cli",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "ip3Xz/dILw2RMM6Z0MzAj5TUZ/c=",
+			"path": "github.com/franela/goblin",
+			"revision": "2fa789fd0c6b7975acbfb89a04830b4081a7b0e9",
+			"revisionTime": "2017-01-11T05:10:28Z"
+		},
+		{
+			"checksumSHA1": "bvHZOqZm2Gl0XkMh4oOB8iZ7geQ=",
+			"path": "github.com/gin-gonic/gin",
+			"revision": "d5b353c5d5a560322e6d96121c814115562501f7",
+			"revisionTime": "2017-04-28T10:59:23Z"
+		},
+		{
+			"checksumSHA1": "UsILDoIB2S7ra+w2fMdb85mX3HM=",
+			"path": "github.com/gin-gonic/gin/binding",
+			"revision": "d5b353c5d5a560322e6d96121c814115562501f7",
+			"revisionTime": "2017-04-28T10:59:23Z"
+		},
+		{
+			"checksumSHA1": "PHv9FNb7YavJWtAHcY6ZgXmkmHs=",
+			"path": "github.com/gin-gonic/gin/render",
+			"revision": "d5b353c5d5a560322e6d96121c814115562501f7",
+			"revisionTime": "2017-04-28T10:59:23Z"
+		},
+		{
+			"checksumSHA1": "kBeNcaKk56FguvPSUCEaH6AxpRc=",
+			"path": "github.com/golang/protobuf/proto",
+			"revision": "fec3b39b059c0f88fa6b20f5ed012b1aa203a8b4",
+			"revisionTime": "2017-05-12T17:16:34Z"
+		},
+		{
+			"path": "github.com/jfrogdev/jfrog-cli-go/artifactory/commands",
+			"revision": ""
+		},
+		{
+			"path": "github.com/jfrogdev/jfrog-cli-go/artifactory/utils",
+			"revision": ""
+		},
+		{
+			"path": "github.com/jfrogdev/jfrog-cli-go/utils/cliutils",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "ESixuIdBHc5sfZWLJfEb37It7bw=",
+			"path": "github.com/jfrogdev/jfrog-cli-go/utils/cliutils/log",
+			"revision": "5526cb0c016ba71a3636271bbb4ecbb8e8f2a528",
+			"revisionTime": "2017-03-30T14:28:02Z"
+		},
+		{
+			"path": "github.com/jfrogdev/jfrog-cli-go/utils/cliutils/logger",
+			"revision": ""
+		},
+		{
+			"path": "github.com/jfrogdev/jfrog-cli-go/utils/cliutils/types",
+			"revision": ""
+		},
+		{
+			"path": "github.com/jfrogdev/jfrog-cli-go/utils/config",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "ES4ZRyIya3yL20y1Fvq43+hfBvs=",
+			"path": "github.com/jfrogdev/jfrog-cli-go/utils/io/fileutils",
+			"revision": "5526cb0c016ba71a3636271bbb4ecbb8e8f2a528",
+			"revisionTime": "2017-03-30T14:28:02Z"
+		},
+		{
+			"path": "github.com/jfrogdev/jfrog-cli-go/utils/io/httputils",
+			"revision": ""
+		},
+		{
+			"path": "github.com/jfrogdev/jfrog-cli-go/utils/ioutils",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "b0T0Hzd+zYk+OCDTFMps+jwa/nY=",
+			"path": "github.com/manucorporat/sse",
+			"revision": "ee05b128a739a0fb76c7ebd3ae4810c1de808d6d",
+			"revisionTime": "2016-01-26T18:01:36Z"
+		},
+		{
+			"checksumSHA1": "U6lX43KDDlNOn+Z0Yyww+ZzHfFo=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "fc9e8d8ef48496124e79ae0df75490096eccf6fe",
+			"revisionTime": "2017-03-22T23:44:13Z"
+		},
+		{
+			"path": "github.com/urfave/cli",
+			"revision": ""
+		},
+		{
+			"path": "golang.org/x/crypto/curve25519",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "wGb//LjBPNxYHqk+dcLo7BjPXK8=",
+			"path": "golang.org/x/crypto/ed25519",
+			"revision": "0fe963104e9d1877082f8fb38f816fcd97eb1d10",
+			"revisionTime": "2017-05-16T11:44:04Z"
+		},
+		{
+			"checksumSHA1": "LXFcVx8I587SnWmKycSDEq9yvK8=",
+			"path": "golang.org/x/crypto/ed25519/internal/edwards25519",
+			"revision": "0fe963104e9d1877082f8fb38f816fcd97eb1d10",
+			"revisionTime": "2017-05-16T11:44:04Z"
+		},
+		{
+			"path": "golang.org/x/crypto/ssh",
+			"revision": ""
+		},
+		{
+			"path": "golang.org/x/crypto/ssh/terminal",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "Y+HGqEkYM15ir+J93MEaHdyFy0c=",
+			"path": "golang.org/x/net/context",
+			"revision": "513929065c19401a1c7b76ecd942f9f86a0c061b",
+			"revisionTime": "2017-05-12T22:20:15Z"
+		},
+		{
+			"path": "golang.org/x/sys/unix",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "39V1idWER42Lmcmg2Uy40wMzOlo=",
+			"path": "gopkg.in/go-playground/validator.v8",
+			"revision": "5f57d2222ad794d0dffb07e664ea05e2ee07d60c",
+			"revisionTime": "2016-07-18T13:41:25Z"
+		},
+		{
+			"checksumSHA1": "fALlQNY1fM99NesfLJ50KguWsio=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b",
+			"revisionTime": "2017-04-07T17:21:22Z"
+		}
+	],
+	"rootPath": "github.com/jmccann/drone-artifactory"
+}
