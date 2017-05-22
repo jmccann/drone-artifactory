@@ -1,14 +1,11 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"net/url"
 	"os"
 	"os/exec"
 	"strings"
 
-	"github.com/jfrogdev/jfrog-cli-go/utils/io/httputils"
 	"github.com/Sirupsen/logrus"
 )
 
@@ -36,19 +33,6 @@ const jfrogExe = "/bin/jfrog"
 func (p Plugin) Exec() error {
 	err := validateInput(p.Config)
 
-	if err != nil {
-		return err
-	}
-
-	// Get repo key and upload path
-	repo, _, err := parseArtifactoryPath(p.Config.Path)
-
-	if err != nil {
-		return err
-	}
-
-	// Check repo exists
-	err = isRepoExist(p.Config, repo)
 	if err != nil {
 		return err
 	}
@@ -122,36 +106,6 @@ func executeCommand(cmd *exec.Cmd, sensitive bool) error {
 	err := cmd.Run()
 
 	return err
-}
-
-func isRepoExist(c Config, repokey string) error {
-	logrus.Infof("Checking repo %s exists", fmt.Sprintf("%s/%s", c.Url, repokey))
-	resp, _, _,err := httputils.SendGet(fmt.Sprintf("%s/%s", c.Url, repokey), true, httputils.HttpClientDetails{User: c.Username, Password: c.Password})
-
-	if err != nil {
-		return err
-	}
-
-	if resp.StatusCode != 400 {
-		return nil
-	}
-
-	return errors.New(fmt.Sprintf("Repo %s does not exist", fmt.Sprintf("%s/%s", c.Url, repokey)))
-}
-
-func parseArtifactoryPath(p string) (string, string, error) {
-	u, err := url.Parse(p)
-
-	if err != nil {
-		return "", "", err
-	}
-
-	path := u.Path
-
-	// Remove initial forward slash
-	e := strings.Split(path, "/")
-
-	return e[0], strings.Join(e[1:len(e)], "/"), nil
 }
 
 // trace writes each command to stdout with the command wrapped in an xml
