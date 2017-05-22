@@ -3,18 +3,10 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "DYv6Q1+VfnUVxMwvk5IshAClLvw=",
 			"path": "github.com/Sirupsen/logrus",
-			"revision": ""
-		},
-		{
-			"checksumSHA1": "LBSBvc68H0Za9OSZ0gli7Hf/tVM=",
-			"path": "github.com/buger/jsonparser",
-			"revision": "016ea00d7ed52c8acc470d90b03d2e6c13516814",
-			"revisionTime": "2017-03-25T17:55:28Z"
-		},
-		{
-			"path": "github.com/codegangsta/cli",
-			"revision": ""
+			"revision": "5e5dc898656f695e2a086b8e12559febbfc01562",
+			"revisionTime": "2017-05-15T10:45:16Z"
 		},
 		{
 			"checksumSHA1": "ip3Xz/dILw2RMM6Z0MzAj5TUZ/c=",
@@ -47,50 +39,6 @@
 			"revisionTime": "2017-05-12T17:16:34Z"
 		},
 		{
-			"path": "github.com/jfrogdev/jfrog-cli-go/artifactory/commands",
-			"revision": ""
-		},
-		{
-			"path": "github.com/jfrogdev/jfrog-cli-go/artifactory/utils",
-			"revision": ""
-		},
-		{
-			"path": "github.com/jfrogdev/jfrog-cli-go/utils/cliutils",
-			"revision": ""
-		},
-		{
-			"checksumSHA1": "ESixuIdBHc5sfZWLJfEb37It7bw=",
-			"path": "github.com/jfrogdev/jfrog-cli-go/utils/cliutils/log",
-			"revision": "5526cb0c016ba71a3636271bbb4ecbb8e8f2a528",
-			"revisionTime": "2017-03-30T14:28:02Z"
-		},
-		{
-			"path": "github.com/jfrogdev/jfrog-cli-go/utils/cliutils/logger",
-			"revision": ""
-		},
-		{
-			"path": "github.com/jfrogdev/jfrog-cli-go/utils/cliutils/types",
-			"revision": ""
-		},
-		{
-			"path": "github.com/jfrogdev/jfrog-cli-go/utils/config",
-			"revision": ""
-		},
-		{
-			"checksumSHA1": "ES4ZRyIya3yL20y1Fvq43+hfBvs=",
-			"path": "github.com/jfrogdev/jfrog-cli-go/utils/io/fileutils",
-			"revision": "5526cb0c016ba71a3636271bbb4ecbb8e8f2a528",
-			"revisionTime": "2017-03-30T14:28:02Z"
-		},
-		{
-			"path": "github.com/jfrogdev/jfrog-cli-go/utils/io/httputils",
-			"revision": ""
-		},
-		{
-			"path": "github.com/jfrogdev/jfrog-cli-go/utils/ioutils",
-			"revision": ""
-		},
-		{
 			"checksumSHA1": "b0T0Hzd+zYk+OCDTFMps+jwa/nY=",
 			"path": "github.com/manucorporat/sse",
 			"revision": "ee05b128a739a0fb76c7ebd3ae4810c1de808d6d",
@@ -103,32 +51,10 @@
 			"revisionTime": "2017-03-22T23:44:13Z"
 		},
 		{
+			"checksumSHA1": "79A2m2Zs96hg/3xtcsOBzkpPAKM=",
 			"path": "github.com/urfave/cli",
-			"revision": ""
-		},
-		{
-			"path": "golang.org/x/crypto/curve25519",
-			"revision": ""
-		},
-		{
-			"checksumSHA1": "wGb//LjBPNxYHqk+dcLo7BjPXK8=",
-			"path": "golang.org/x/crypto/ed25519",
-			"revision": "0fe963104e9d1877082f8fb38f816fcd97eb1d10",
-			"revisionTime": "2017-05-16T11:44:04Z"
-		},
-		{
-			"checksumSHA1": "LXFcVx8I587SnWmKycSDEq9yvK8=",
-			"path": "golang.org/x/crypto/ed25519/internal/edwards25519",
-			"revision": "0fe963104e9d1877082f8fb38f816fcd97eb1d10",
-			"revisionTime": "2017-05-16T11:44:04Z"
-		},
-		{
-			"path": "golang.org/x/crypto/ssh",
-			"revision": ""
-		},
-		{
-			"path": "golang.org/x/crypto/ssh/terminal",
-			"revision": ""
+			"revision": "d70f47eeca3afd795160003bc6e28b001d60c67c",
+			"revisionTime": "2017-05-06T04:25:29Z"
 		},
 		{
 			"checksumSHA1": "Y+HGqEkYM15ir+J93MEaHdyFy0c=",
@@ -137,8 +63,10 @@
 			"revisionTime": "2017-05-12T22:20:15Z"
 		},
 		{
+			"checksumSHA1": "wxrHmKhFznZZAjrYK5/nWn+fZGc=",
 			"path": "golang.org/x/sys/unix",
-			"revision": ""
+			"revision": "dbc2be9168a660ef302e04b6ff6406de6f967473",
+			"revisionTime": "2017-05-20T17:05:02Z"
 		},
 		{
 			"checksumSHA1": "39V1idWER42Lmcmg2Uy40wMzOlo=",
