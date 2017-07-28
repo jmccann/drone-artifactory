@@ -53,13 +53,12 @@ Please see the [Drone documentation](http://docs.drone.io/manage-secrets/) to le
 pipeline:
   artifactory:
     image: jmccann/drone-artifactory:1
-    url: https://binrepo.target.com
 -   username: JohnDoe
 -   password: abcd1234
 +   secrets: [ artifactory_username, artifactory_password ]
-    pom: pom.xml
-    repo_key: libs-snapshot-local
-    files:
+    url: https://myarti.com/artifactory
+    path: libs-snapshot-local/${DRONE_TAG}
+    sources:
       - target/*.jar
       - target/*.war
       - dist/**/*.min.js
