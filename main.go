@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/urfave/cli"
+	"github.com/bradrydzewski/cli"
 )
 
 var revision string // build number set at compile-time
@@ -35,6 +35,7 @@ func main() {
 			Name: "path",
 			Usage: "Where to upload artifacts to",
 			EnvVar: "PLUGIN_PATH",
+			FilePath: ".artifactory_path",
 		},
 		cli.StringFlag{
 			Name: "password",

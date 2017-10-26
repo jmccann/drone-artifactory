@@ -9,6 +9,12 @@
 			"revisionTime": "2017-05-15T10:45:16Z"
 		},
 		{
+			"checksumSHA1": "wf8Pr97yiM3pcUXe7cQetqHjDY8=",
+			"path": "github.com/bradrydzewski/cli",
+			"revision": "0d51abd87c7705e9ee80d7227d77fcea82d69b7f",
+			"revisionTime": "2017-04-24T18:43:48Z"
+		},
+		{
 			"checksumSHA1": "ip3Xz/dILw2RMM6Z0MzAj5TUZ/c=",
 			"path": "github.com/franela/goblin",
 			"revision": "2fa789fd0c6b7975acbfb89a04830b4081a7b0e9",
@@ -49,12 +55,6 @@
 			"path": "github.com/mattn/go-isatty",
 			"revision": "fc9e8d8ef48496124e79ae0df75490096eccf6fe",
 			"revisionTime": "2017-03-22T23:44:13Z"
-		},
-		{
-			"checksumSHA1": "79A2m2Zs96hg/3xtcsOBzkpPAKM=",
-			"path": "github.com/urfave/cli",
-			"revision": "d70f47eeca3afd795160003bc6e28b001d60c67c",
-			"revisionTime": "2017-05-06T04:25:29Z"
 		},
 		{
 			"checksumSHA1": "Y+HGqEkYM15ir+J93MEaHdyFy0c=",
