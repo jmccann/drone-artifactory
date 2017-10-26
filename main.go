@@ -45,7 +45,7 @@ func main() {
 		cli.BoolTFlag{
 			Name: "recursive",
 			Usage: "artifacts are also collected from sub-folders of the source directory for upload.",
-			EnvVar: "PLUGIN_REGEXP",
+			EnvVar: "PLUGIN_RECURSIVE",
 		},
 		cli.BoolFlag{
 			Name: "regexp",
