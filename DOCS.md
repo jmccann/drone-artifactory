@@ -33,7 +33,8 @@ You can override the default configuration with the following parameters:
 * `username` - Artifactory username
 * `password` - Artifactory password
 * `sources` - List of files to upload
-* `path` - Target path to upload files to
+* `path` - Target path to upload files to.  Value can also be pre-generated in
+prior step and written/read from `.aritfactory_path` file.
 * `dryrun` - Pretend to upload but don't actually upload
 * `flat` - Artifacts are uploaded to the exact target path specified and their hierarchy in the source file system is ignored.  Default: `true`
 * `include_dirs` - Source path applies to bottom-chain directories and not only to files. Bottom-chain directories are either empty or do not include other directories that match the source path.  Default: `false`
