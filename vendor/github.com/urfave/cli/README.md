@@ -34,6 +34,7 @@ applications in an expressive way.
     + [Values from the Environment](#values-from-the-environment)
     + [Values from files](#values-from-files)
     + [Values from alternate input sources (YAML, TOML, and others)](#values-from-alternate-input-sources-yaml-toml-and-others)
+    + [Precedence](#precedence)
   * [Subcommands](#subcommands)
   * [Subcommands categories](#subcommands-categories)
   * [Exit code](#exit-code)
@@ -692,6 +693,15 @@ func main() {
 }
 ```
 
+#### Precedence
+
+The precedence for flag value sources is as follows (highest to lowest):
+
+0. Command line flag value from user
+0. Environment variable (if specified)
+0. Configuration file (if specified)
+0. Default defined on the flag
+
 ### Subcommands
 
 Subcommands can be defined for a more git-like command line app.
@@ -787,11 +797,11 @@ func main() {
     },
     {
       Name:     "add",
-      Category: "template",
+      Category: "Template actions",
     },
     {
       Name:     "remove",
-      Category: "template",
+      Category: "Template actions",
     },
   }
 

@@ -2,9 +2,10 @@ package main
 
 import (
 	"os"
+	"strings"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/bradrydzewski/cli"
+	"github.com/urfave/cli"
 )
 
 var revision string // build number set at compile-time
@@ -87,7 +88,7 @@ func run(c *cli.Context) error {
 		Config: Config{
 			Flat:        c.Bool("flat"),
 			IncludeDirs: c.Bool("include-dirs"),
-			Path:        c.String("path"),
+			Path:        strings.TrimSpace(c.String("path")),
 			Password:    c.String("password"),
 			Recursive:   c.Bool("recursive"),
 			Regexp:      c.Bool("regexp"),
