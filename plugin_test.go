@@ -27,6 +27,7 @@ func TestPlugin(t *testing.T) {
 		g.It("Should upload files and directories", func() {
 			err := plugin.Exec()
 			g.Assert(err == nil).IsTrue(fmt.Sprintf("Failed to upload stuff: %s", err))
+			//g.Assert(uploaded == 2).IsTrue(fmt.Sprintf("Should have uploaded 2 files instead of %d files", uploaded))
 		})
 
 		g.It("Should upload a file", func() {
@@ -53,7 +54,7 @@ var (
 	c = Config{
 		DryRun: true,
 		Path: "thekey/with/path",
-		Password: "secret",
+		Password: "supersecret",
 		ApiKey: "apikeyofartifactory",
 		Sources: []string{"main.go", "fixtures/*"},
 		Url: "http://company.com",

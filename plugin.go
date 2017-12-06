@@ -53,8 +53,6 @@ func (p Plugin) Exec() error {
 
 	// jfrog rt upload
 	for _, source := range p.Config.Sources {
-		fmt.Printf("Started Here")
-		fmt.Printf("%v\n", source)
 		err = executeCommand(commandUpload(source, p.Config), false)
 
 		if err != nil {
@@ -72,9 +70,6 @@ func commandVersion() *exec.Cmd {
 
 // helper function to create the jfrog rt config command.
 func commandConfig(c Config) *exec.Cmd {
-	fmt.Printf("Started Executing!!")
-	fmt.Printf("%v\n", c.Url)
-	fmt.Printf("%v\n", c.Username)
 	if len(c.ApiKey) > 0 {
 		return exec.Command(
 			jfrogExe,
@@ -86,7 +81,6 @@ func commandConfig(c Config) *exec.Cmd {
 			"--apikey", c.ApiKey,
 		)
 	} else {
-//	if len(c.Password)  > 0 {
 		return exec.Command(
 			jfrogExe,
 			"rt",
@@ -101,10 +95,6 @@ func commandConfig(c Config) *exec.Cmd {
 
 // helper function to create the jfrog rt upload command.
 func commandUpload(source string, c Config) *exec.Cmd {
-
-	fmt.Printf("%v\n", source)
-	fmt.Printf("%v\n", c.Path)
-
 	return exec.Command(
 		jfrogExe,
 		"rt",
