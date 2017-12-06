@@ -57,7 +57,7 @@ var (
 		ApiKey: "apikeyofartifactory",
 		Sources: []string{"main.go", "fixtures/*"},
 		Url: "http://company.com",
-		Username: "username",
+		Username: "johndoe",
 	}
 	plugin = Plugin{
 		Config: c,
