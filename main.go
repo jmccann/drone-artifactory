@@ -43,6 +43,11 @@ func main() {
 			Usage: "Artifactory server password",
 			EnvVar: "ARTIFACTORY_PASSWORD,PLUGIN_PASSWORD",
 		},
+		cli.StringFlag{
+			Name: "apikey",
+			Usage: "Artifactory API Key",
+			EnvVar: "ARTIFACTORY_APIKEY, PLUGIN_APIKEY",
+		},
 		cli.BoolTFlag{
 			Name: "recursive",
 			Usage: "artifacts are also collected from sub-folders of the source directory for upload.",
@@ -89,6 +94,7 @@ func run(c *cli.Context) error {
 			Flat:        c.Bool("flat"),
 			IncludeDirs: c.Bool("include-dirs"),
 			Path:        strings.TrimSpace(c.String("path")),
+			ApiKey:      c.String("apikey"),
 			Password:    c.String("password"),
 			Recursive:   c.Bool("recursive"),
 			Regexp:      c.Bool("regexp"),

@@ -16,6 +16,7 @@ type (
 		IncludeDirs bool
 		Path        string
 		Password    string
+		ApiKey      string
 		Recursive   bool
 		Regexp      bool
 		Sources     []string
@@ -28,7 +29,10 @@ type (
 	}
 )
 
+//const jfrogExe = "/usr/local/bin/jfrog"
+
 const jfrogExe = "/bin/jfrog"
+
 
 func (p Plugin) Exec() error {
 	err := validateInput(p.Config)
@@ -52,6 +56,8 @@ func (p Plugin) Exec() error {
 
 	// jfrog rt upload
 	for _, source := range p.Config.Sources {
+		fmt.Printf("Started Here")
+		fmt.Printf("%v\n", source)
 		err = executeCommand(commandUpload(source, p.Config), false)
 
 		if err != nil {
@@ -69,19 +75,39 @@ func commandVersion() *exec.Cmd {
 
 // helper function to create the jfrog rt config command.
 func commandConfig(c Config) *exec.Cmd {
-	return exec.Command(
-		jfrogExe,
-		"rt",
-		"config",
-		"--interactive=false",
-		"--url", c.Url,
-		"--user", c.Username,
-		"--password", c.Password, "--enc-password=false",
-	)
+	fmt.Printf("Started Executing!!")
+	fmt.Printf("%v\n", c.Url)
+	fmt.Printf("%v\n", c.Username)
+	if len(c.ApiKey) > 0 {
+		return exec.Command(
+			jfrogExe,
+			"rt",
+			"config",
+			"--interactive=false",
+			"--url", c.Url,
+			"--user", c.Username,
+			"--apikey", c.ApiKey,
+		)
+	} else {
+//	if len(c.Password)  > 0 {
+		return exec.Command(
+			jfrogExe,
+			"rt",
+			"config",
+			"--interactive=false",
+			"--url", c.Url,
+			"--user", c.Username,
+			"--password", c.Password, "--enc-password=false",
+		)
+	}
 }
 
 // helper function to create the jfrog rt upload command.
 func commandUpload(source string, c Config) *exec.Cmd {
+
+	fmt.Printf("%v\n", source)
+	fmt.Printf("%v\n", c.Path)
+
 	return exec.Command(
 		jfrogExe,
 		"rt",
@@ -118,8 +144,8 @@ func validateInput(c Config) error {
 	if len(c.Sources) == 0 {
 		return fmt.Errorf("No sources provided")
 	}
-	if len(c.Password) == 0 {
-		return fmt.Errorf("No password provided")
+	if len(c.Password) == 0 && len(c.ApiKey) == 0 {
+		return fmt.Errorf("No ApiKey or Password provided")
 	}
 	if len(c.Path) == 0 {
 		return fmt.Errorf("No path provided")

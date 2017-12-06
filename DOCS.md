@@ -31,7 +31,8 @@ You can override the default configuration with the following parameters:
 
 * `url` - Artifactory URL
 * `username` - Artifactory username
-* `password` - Artifactory password
+* `apikey` - Artifactory ApiKey
+* `password` - Artifactory password (Not required if apikey is provided)
 * `sources` - List of files to upload
 * `path` - Target path to upload files to.  Value can also be pre-generated in
 prior step and written/read from `.aritfactory_path` file.
