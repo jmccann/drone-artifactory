@@ -29,10 +29,7 @@ type (
 	}
 )
 
-//const jfrogExe = "/usr/local/bin/jfrog"
-
 const jfrogExe = "/bin/jfrog"
-
 
 func (p Plugin) Exec() error {
 	err := validateInput(p.Config)
