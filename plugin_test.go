@@ -4,12 +4,10 @@ import (
 	"fmt"
 	// "io"
 	"testing"
-
 	. "github.com/franela/goblin"
 
-	"net/http/httptest"
-
 	"github.com/jmccann/drone-artifactory/fixtures"
+	"net/http/httptest"
 )
 
 func TestPlugin(t *testing.T) {
@@ -55,12 +53,12 @@ func TestPlugin(t *testing.T) {
 
 var (
 	c = Config{
-		DryRun:   true,
-		Path:     "thekey/with/path",
+		DryRun: true,
+		Path: "thekey/with/path",
 		Password: "supersecret",
-		ApiKey:   "apikeyofartifactory",
-		Sources:  []string{"main.go", "fixtures/*"},
-		Url:      "http://company.com",
+		ApiKey: "apikeyofartifactory",
+		Sources: []string{"main.go", "fixtures/*"},
+		Url: "http://company.com",
 		Username: "johndoe",
 	}
 	plugin = Plugin{
