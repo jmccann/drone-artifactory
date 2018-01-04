@@ -37,7 +37,6 @@ func TestPlugin(t *testing.T) {
 
 			err := plugin.Exec()
 			g.Assert(err == nil).IsTrue(fmt.Sprintf("Failed to upload stuff: %s", err))
-			// g.Assert(uploaded == 1).IsTrue(fmt.Sprintf("Should have uploaded 1 file instead of %d files", uploaded))
 		})
 
 		g.It("Should upload glob of files", func() {
@@ -46,7 +45,6 @@ func TestPlugin(t *testing.T) {
 
 			err := plugin.Exec()
 			g.Assert(err == nil).IsTrue(fmt.Sprintf("Failed to upload stuff: %s", err))
-			// g.Assert(uploaded == 3).IsTrue(fmt.Sprintf("Should have uploaded 3 files instead of %d files", uploaded))
 		})
 	})
 }
