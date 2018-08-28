@@ -47,7 +47,6 @@ func (p Plugin) Exec() error {
 
 	logrus.Info("Creating CLI config")
 	err = executeCommand(commandConfig(p.Config), true) // jfrog rt config
-	// TODO currently failing at jfrog rt config
 	if err != nil {
 		return err
 	}
