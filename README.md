@@ -8,7 +8,7 @@ Drone plugin to publish artifacts from the build to [Artifactory](https://www.jf
 
 Build the binary with the following commands:
 
-```
+```sh
 go build
 go test
 ```
@@ -19,7 +19,7 @@ go test
 
 Build the docker image with the following commands:
 
-```
+```sh
 drone exec
 docker build -t jmccann/drone-artifactory .
 ```
@@ -28,7 +28,7 @@ docker build -t jmccann/drone-artifactory .
 
 Execute from the working directory:
 
-```
+```sh
 docker run --rm \
   jmccann/drone-artifactory --url https://myarti.com/artifactory \
   --username JohnDoe --password abcd1234 \

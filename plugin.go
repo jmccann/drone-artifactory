@@ -16,11 +16,11 @@ type (
 		IncludeDirs bool
 		Path        string
 		Password    string
-		ApiKey      string
+		APIKey      string
 		Recursive   bool
 		Regexp      bool
 		Sources     []string
-		Url         string
+		URL         string
 		Username    string
 	}
 
@@ -31,6 +31,7 @@ type (
 
 const jfrogExe = "/bin/jfrog"
 
+// Exec run the plugin
 func (p Plugin) Exec() error {
 	err := validateInput(p.Config)
 
@@ -46,7 +47,6 @@ func (p Plugin) Exec() error {
 
 	logrus.Info("Creating CLI config")
 	err = executeCommand(commandConfig(p.Config), true) // jfrog rt config
-
 	if err != nil {
 		return err
 	}
@@ -70,27 +70,26 @@ func commandVersion() *exec.Cmd {
 
 // helper function to create the jfrog rt config command.
 func commandConfig(c Config) *exec.Cmd {
-	if len(c.ApiKey) > 0 {
+	if len(c.APIKey) > 0 {
 		return exec.Command(
 			jfrogExe,
 			"rt",
 			"config",
 			"--interactive=false",
-			"--url", c.Url,
+			"--url", c.URL,
 			"--user", c.Username,
-			"--apikey", c.ApiKey,
-		)
-	} else {
-		return exec.Command(
-			jfrogExe,
-			"rt",
-			"config",
-			"--interactive=false",
-			"--url", c.Url,
-			"--user", c.Username,
-			"--password", c.Password, "--enc-password=false",
+			"--apikey", c.APIKey, "--enc-password=false",
 		)
 	}
+	return exec.Command(
+		jfrogExe,
+		"rt",
+		"config",
+		"--interactive=false",
+		"--url", c.URL,
+		"--user", c.Username,
+		"--password", c.Password, "--enc-password=false",
+	)
 }
 
 // helper function to create the jfrog rt upload command.
@@ -131,16 +130,13 @@ func validateInput(c Config) error {
 	if len(c.Sources) == 0 {
 		return fmt.Errorf("No sources provided")
 	}
-	if len(c.Password) == 0 && len(c.ApiKey) == 0 {
+	if len(c.Password) == 0 && len(c.APIKey) == 0 {
 		return fmt.Errorf("No ApiKey or Password provided")
 	}
 	if len(c.Path) == 0 {
 		return fmt.Errorf("No path provided")
 	}
-	if len(c.Sources) == 0 {
-		return fmt.Errorf("No sources provided")
-	}
-	if len(c.Url) == 0 {
+	if len(c.URL) == 0 {
 		return fmt.Errorf("No url provided")
 	}
 	if len(c.Username) == 0 {

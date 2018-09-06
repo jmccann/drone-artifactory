@@ -4,7 +4,7 @@ workspace:
 
 pipeline:
   build:
-    image: golang:1.8
+    image: golang:1.11
     environment:
       - CGO_ENABLED=0
     commands:

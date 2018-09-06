@@ -19,9 +19,9 @@ func Handler() http.Handler {
 }
 
 func getRepo(c *gin.Context) {
-  c.String(200, "")
+	c.String(200, "")
 }
 
 func getFile(c *gin.Context) {
-  c.String(200, "")
+	c.String(200, "")
 }
