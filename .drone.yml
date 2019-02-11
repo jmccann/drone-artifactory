@@ -36,16 +36,13 @@ steps:
     event:
     - pull_request
 
-- name: build-tag
+- name: build
   image: golang:1.11
   environment:
     CGO_ENABLED: 0
     GO111MODULE: on
   commands:
   - go build -ldflags "-s -w -X main.revision=$(git rev-parse HEAD)" -a
-  when:
-    event:
-    - tag
 
 - name: publish
   image: plugins/docker
