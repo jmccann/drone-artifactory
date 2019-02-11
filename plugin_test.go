@@ -86,6 +86,7 @@ func TestPlugin(t *testing.T) {
 		})
 		g.It("- should fail on username", func() {
 			config.Username = ""
+			config.APIKey = ""
 			err := validateInput(config)
 			g.Assert(err != nil).IsTrue()
 			g.Assert(err).Equal(fmt.Errorf("No username provided"))

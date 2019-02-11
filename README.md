@@ -1,16 +1,17 @@
 # drone-artifactory
 
-[![Build Status](http://beta.drone.io/api/badges/jmccann/drone-artifactory/status.svg)](http://beta.drone.io/jmccann/drone-artifactory)
+[![Build Status](https://cloud.drone.io/api/badges/jmccann/drone-artifactory/status.svg)](https://cloud.drone.io/jmccann/drone-artifactory)
 
 Drone plugin to publish artifacts from the build to [Artifactory](https://www.jfrog.com/artifactory/).
 
-## Build
+## Build & Test
 
-Build the binary with the following commands:
+Build/test the binary with the following commands:
 
 ```sh
+export GO111MODULE=on
+go test -cover ./...
 go build
-go test
 ```
 
 ## Docker
@@ -21,7 +22,6 @@ Build the docker image with the following commands:
 
 ```sh
 drone exec
-docker build -t jmccann/drone-artifactory .
 ```
 
 ## Usage

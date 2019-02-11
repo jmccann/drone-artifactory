@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 type (
@@ -77,7 +77,6 @@ func commandConfig(c Config) *exec.Cmd {
 			"config",
 			"--interactive=false",
 			"--url", c.URL,
-			"--user", c.Username,
 			"--apikey", c.APIKey, "--enc-password=false",
 		)
 	}
@@ -139,7 +138,7 @@ func validateInput(c Config) error {
 	if len(c.URL) == 0 {
 		return fmt.Errorf("No url provided")
 	}
-	if len(c.Username) == 0 {
+	if len(c.Username) == 0 && len(c.APIKey) == 0 {
 		return fmt.Errorf("No username provided")
 	}
 

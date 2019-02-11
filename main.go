@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 
@@ -22,6 +22,11 @@ func main() {
 		// plugin args
 		//
 
+		cli.BoolTFlag{
+			Name:   "dry-run",
+			Usage:  "if the plugin should pretend to upload but don't actually upload",
+			EnvVar: "PLUGIN_DRY_RUN",
+		},
 		cli.BoolTFlag{
 			Name:   "flat",
 			Usage:  "artifacts are uploaded to the exact target path specified and their hierarchy in the source file system is ignored",
@@ -91,6 +96,7 @@ func run(c *cli.Context) error {
 
 	plugin := Plugin{
 		Config: Config{
+			DryRun:      c.Bool("dry-run"),
 			Flat:        c.Bool("flat"),
 			IncludeDirs: c.Bool("include-dirs"),
 			Path:        strings.TrimSpace(c.String("path")),

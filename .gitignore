@@ -1,3 +1,4 @@
 drone-artifactory
 coverage.out
 jfrog
+vendor/
