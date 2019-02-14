@@ -22,9 +22,9 @@ func main() {
 		// plugin args
 		//
 
-		cli.BoolTFlag{
+		cli.BoolFlag{
 			Name:   "dry-run",
-			Usage:  "if the plugin should pretend to upload but don't actually upload",
+			Usage:  "if the plugin should pretend to upload but doesn't actually upload",
 			EnvVar: "PLUGIN_DRY_RUN",
 		},
 		cli.BoolTFlag{
