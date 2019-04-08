@@ -1,6 +1,10 @@
 workflow "Test" {
   on = "push"
-  resolves = ["linting", "testing"]
+  resolves = [
+    "linting",
+    "testing",
+    "Docker Build",
+  ]
 }
 
 action "linting" {
@@ -19,4 +23,9 @@ action "testing" {
   env = {
     GO111MODULE = "on"
   }
+}
+
+action "Docker Build" {
+  uses = "docker://docker:stable"
+  args = "build -t jmccann/drone-artifactory:build-num ."
 }
