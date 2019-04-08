@@ -1,13 +1,13 @@
-workflow "Test" {
-  on = "push"
+workflow "Push" {
   resolves = [
-    "linting",
-    "testing",
     "Docker Build",
+    "Lint",
+    "Test",
   ]
+  on = "push"
 }
 
-action "linting" {
+action "Lint" {
   uses = "docker://golang:1.12"
   runs = "go"
   args = "fmt"
@@ -16,7 +16,7 @@ action "linting" {
   }
 }
 
-action "testing" {
+action "Test" {
   uses = "docker://golang:1.12"
   runs = "go"
   args = "test -cover"
