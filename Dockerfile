@@ -19,7 +19,7 @@ WORKDIR /tmp/drone-artifactory
 COPY . .
 
 RUN go mod download
-RUN go test
+RUN go test -tags cli
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo -o /go/bin/drone-artifactory
 
 #
