@@ -1,6 +1,6 @@
 workflow "Test" {
   on = "push"
-  resolves = ["testing"]
+  resolves = ["linting", "testing"]
 }
 
 action "linting" {
@@ -14,7 +14,6 @@ action "linting" {
 
 action "testing" {
   uses = "docker://golang:1.12"
-  needs = ["linting"]
   runs = "go"
   args = "test"
   env = {
