@@ -15,7 +15,7 @@ action "linting" {
 action "testing" {
   uses = "docker://golang:1.12"
   runs = "go"
-  args = "test"
+  args = "test -cover"
   env = {
     GO111MODULE = "on"
   }
