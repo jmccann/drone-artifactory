@@ -4,7 +4,7 @@ workflow "Test" {
 }
 
 action "linting" {
-  uses = "golang:1.12"
+  uses = "docker://golang:1.12"
   runs = "go"
   args = "fmt"
   env = {
