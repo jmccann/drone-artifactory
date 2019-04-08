@@ -1,7 +1,5 @@
 # drone-artifactory
 
-[![Build Status](http://beta.drone.io/api/badges/jmccann/drone-artifactory/status.svg)](http://beta.drone.io/jmccann/drone-artifactory)
-
 Drone plugin to publish artifacts from the build to [Artifactory](https://www.jfrog.com/artifactory/).
 
 ## Build
