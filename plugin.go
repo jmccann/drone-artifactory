@@ -27,6 +27,7 @@ type (
 	// UploadArgs are arguments for uploading files
 	UploadArgs struct {
 		DryRun      bool
+		Explode     bool
 		Flat        bool
 		IncludeDirs bool
 		Path        string
@@ -112,6 +113,7 @@ func commandUpload(source string, args UploadArgs) *exec.Cmd {
 		"rt",
 		"upload",
 		fmt.Sprintf("--dry-run=%t", args.DryRun),
+		fmt.Sprintf("--explode=%t", args.Explode),
 		fmt.Sprintf("--flat=%t", args.Flat),
 		fmt.Sprintf("--include-dirs=%t", args.IncludeDirs),
 		fmt.Sprintf("--recursive=%t", args.Recursive),

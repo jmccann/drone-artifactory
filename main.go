@@ -22,6 +22,11 @@ func main() {
 		// plugin args
 		//
 
+		cli.BoolFlag{
+			Name:   "explode",
+			Usage:  "will extract an archive containing multiple artifacts after it is deployed to Artifactory, while maintaining the archive's file structure",
+			EnvVar: "PLUGIN_EXPLODE",
+		},
 		cli.BoolTFlag{
 			Name:   "flat",
 			Usage:  "artifacts are uploaded to the exact target path specified and their hierarchy in the source file system is ignored",
@@ -97,6 +102,7 @@ func run(c *cli.Context) error {
 			Username: c.String("username"),
 		},
 		UploadArgs: UploadArgs{
+			Explode:     c.Bool("explode"),
 			Flat:        c.Bool("flat"),
 			IncludeDirs: c.Bool("include-dirs"),
 			Path:        strings.TrimSpace(c.String("path")),

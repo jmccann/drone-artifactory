@@ -11,6 +11,29 @@ func TestPlugin(t *testing.T) {
 	g := Goblin(t)
 	p := plugin
 
+	g.Describe("Generates Upload Command", func() {
+		args := p.UploadArgs
+
+		g.BeforeEach(func() {
+			args = p.UploadArgs
+		})
+
+		g.It("default command", func() {
+			expectedArgs := []string{"/bin/jfrog", "rt", "upload", "--dry-run=true", "--explode=false", "--flat=false", "--include-dirs=false", "--recursive=false", "--regexp=false", "some-source", "thekey/with/path"}
+			cmd := commandUpload("some-source", args)
+			g.Assert(cmd.Args).Equal(expectedArgs)
+		})
+
+		g.It("explode arg", func() {
+			expectedArgs := []string{"/bin/jfrog", "rt", "upload", "--dry-run=true", "--explode=true", "--flat=false", "--include-dirs=false", "--recursive=false", "--regexp=false", "some-source", "thekey/with/path"}
+
+			args.Explode = true
+			cmd := commandUpload("some-source", args)
+
+			g.Assert(cmd.Args).Equal(expectedArgs)
+		})
+	})
+
 	g.Describe("Validate Config", func() {
 		config := p.Config
 
