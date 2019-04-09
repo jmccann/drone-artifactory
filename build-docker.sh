@@ -29,8 +29,6 @@ docker build -t ${DOCKER_IMAGE}:latest .
 docker tag ${DOCKER_IMAGE}:latest ${DOCKER_IMAGE}:${major}
 docker tag ${DOCKER_IMAGE}:latest ${DOCKER_IMAGE}:${major}.${minor}
 
-exit 0
-
 docker push ${DOCKER_IMAGE}:latest
 docker push ${DOCKER_IMAGE}:${major}
 docker push ${DOCKER_IMAGE}:${major}.${minor}
