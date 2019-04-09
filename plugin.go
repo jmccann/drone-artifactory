@@ -10,22 +10,29 @@ import (
 )
 
 type (
+	// Config for plugin
 	Config struct {
+		Password string
+		APIKey   string
+		URL      string
+		Username string
+	}
+
+	// Plugin struct
+	Plugin struct {
+		Config     Config
+		UploadArgs UploadArgs
+	}
+
+	// UploadArgs are arguments for uploading files
+	UploadArgs struct {
 		DryRun      bool
 		Flat        bool
 		IncludeDirs bool
 		Path        string
-		Password    string
-		APIKey      string
 		Recursive   bool
 		Regexp      bool
 		Sources     []string
-		URL         string
-		Username    string
-	}
-
-	Plugin struct {
-		Config Config
 	}
 )
 
@@ -33,7 +40,13 @@ const jfrogExe = "/bin/jfrog"
 
 // Exec run the plugin
 func (p Plugin) Exec() error {
-	err := validateInput(p.Config)
+	err := p.Config.validate()
+
+	if err != nil {
+		return err
+	}
+
+	err = p.UploadArgs.validate()
 
 	if err != nil {
 		return err
@@ -52,8 +65,8 @@ func (p Plugin) Exec() error {
 	}
 
 	// jfrog rt upload
-	for _, source := range p.Config.Sources {
-		err = executeCommand(commandUpload(source, p.Config), false)
+	for _, source := range p.UploadArgs.Sources {
+		err = executeCommand(commandUpload(source, p.UploadArgs), false)
 
 		if err != nil {
 			return err
@@ -93,18 +106,18 @@ func commandConfig(c Config) *exec.Cmd {
 }
 
 // helper function to create the jfrog rt upload command.
-func commandUpload(source string, c Config) *exec.Cmd {
+func commandUpload(source string, args UploadArgs) *exec.Cmd {
 	return exec.Command(
 		jfrogExe,
 		"rt",
 		"upload",
-		fmt.Sprintf("--dry-run=%t", c.DryRun),
-		fmt.Sprintf("--flat=%t", c.Flat),
-		fmt.Sprintf("--include-dirs=%t", c.IncludeDirs),
-		fmt.Sprintf("--recursive=%t", c.Recursive),
-		fmt.Sprintf("--regexp=%t", c.Regexp),
+		fmt.Sprintf("--dry-run=%t", args.DryRun),
+		fmt.Sprintf("--flat=%t", args.Flat),
+		fmt.Sprintf("--include-dirs=%t", args.IncludeDirs),
+		fmt.Sprintf("--recursive=%t", args.Recursive),
+		fmt.Sprintf("--regexp=%t", args.Regexp),
 		source,
-		c.Path,
+		args.Path,
 	)
 }
 
@@ -126,21 +139,29 @@ func trace(cmd *exec.Cmd) {
 	fmt.Fprintf(os.Stdout, "+ %s\n", strings.Join(cmd.Args, " "))
 }
 
-func validateInput(c Config) error {
-	if len(c.Sources) == 0 {
-		return fmt.Errorf("No sources provided")
+func (c Config) validate() error {
+	if len(c.Username) == 0 {
+		return fmt.Errorf("No username provided")
 	}
+
 	if len(c.Password) == 0 && len(c.APIKey) == 0 {
 		return fmt.Errorf("No ApiKey or Password provided")
 	}
-	if len(c.Path) == 0 {
-		return fmt.Errorf("No path provided")
-	}
+
 	if len(c.URL) == 0 {
 		return fmt.Errorf("No url provided")
 	}
-	if len(c.Username) == 0 {
-		return fmt.Errorf("No username provided")
+
+	return nil
+}
+
+func (u UploadArgs) validate() error {
+	if len(u.Sources) == 0 {
+		return fmt.Errorf("No sources provided")
+	}
+
+	if len(u.Path) == 0 {
+		return fmt.Errorf("No path provided")
 	}
 
 	return nil

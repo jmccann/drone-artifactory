@@ -91,16 +91,18 @@ func run(c *cli.Context) error {
 
 	plugin := Plugin{
 		Config: Config{
+			APIKey:   c.String("apikey"),
+			Password: c.String("password"),
+			URL:      c.String("url"),
+			Username: c.String("username"),
+		},
+		UploadArgs: UploadArgs{
 			Flat:        c.Bool("flat"),
 			IncludeDirs: c.Bool("include-dirs"),
 			Path:        strings.TrimSpace(c.String("path")),
-			APIKey:      c.String("apikey"),
-			Password:    c.String("password"),
 			Recursive:   c.Bool("recursive"),
 			Regexp:      c.Bool("regexp"),
 			Sources:     c.StringSlice("sources"),
-			URL:         c.String("url"),
-			Username:    c.String("username"),
 		},
 	}
 
