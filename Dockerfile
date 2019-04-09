@@ -18,9 +18,13 @@ COPY --from=cli /usr/local/bin/jfrog /bin/jfrog
 
 RUN mkdir -p /tmp/drone-artifactory
 WORKDIR /tmp/drone-artifactory
+
+COPY go.mod go.mod
+COPY go.sum go.sum
+RUN go mod download
+
 COPY . .
 
-RUN go mod download
 RUN go test -tags cli
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo -o /go/bin/drone-artifactory
 
