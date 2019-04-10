@@ -2,11 +2,11 @@
 #
 #     docker build -t jmccann/drone-artifactory .
 
-#
-# Get CLI
-#
+# #
+# # Get CLI
+# #
 
-FROM docker.bintray.io/jfrog/jfrog-cli-go:1.24.0 AS cli
+# FROM docker.bintray.io/jfrog/jfrog-cli-go:1.24.0 AS cli
 
 #
 # Build golang binary
@@ -14,7 +14,9 @@ FROM docker.bintray.io/jfrog/jfrog-cli-go:1.24.0 AS cli
 
 FROM golang:1.12 AS builder
 
-COPY --from=cli /usr/local/bin/jfrog /bin/jfrog
+RUN apt update && apt install -y ca-certificates
+
+# COPY --from=cli /usr/local/bin/jfrog /bin/jfrog
 
 RUN mkdir -p /tmp/drone-artifactory
 WORKDIR /tmp/drone-artifactory
@@ -25,7 +27,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go test -tags cli
+RUN go test ./...
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo -o /go/bin/drone-artifactory
 
 #
@@ -34,6 +36,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo -o /go/bin/dro
 
 FROM scratch
 
-COPY --from=cli /usr/local/bin/jfrog /bin/jfrog
+# COPY --from=cli /usr/local/bin/jfrog /bin/jfrog
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /go/bin/drone-artifactory /bin/
 ENTRYPOINT ["/bin/drone-artifactory"]

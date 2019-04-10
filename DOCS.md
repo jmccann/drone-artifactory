@@ -25,6 +25,24 @@ pipeline:
       - dist/**/*.min.js
 ```
 
+```yaml
+pipeline:
+  artifactory:
+    image: jmccann/drone-artifactory:1
+    username: JohnDoe
+    password: abcd1234
+    url: https://myarti.com/artifactory
+    actions:
+      - action: delete
+        path: libs-snapshot-local/${DRONE_TAG}/*
+      - action: upload
+        path: libs-snapshot-local/${DRONE_TAG}
+        sources:
+          - target/*.jar
+          - target/*.war
+          - dist/**/*.min.js
+```
+
 ## Params
 
 You can override the default configuration with the following parameters:

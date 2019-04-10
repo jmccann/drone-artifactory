@@ -1,10 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"os"
-	"strings"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/jmccann/drone-artifactory/artifactory"
 	"github.com/urfave/cli"
 )
 
@@ -22,26 +23,15 @@ func main() {
 		// plugin args
 		//
 
-		cli.BoolFlag{
-			Name:   "explode",
-			Usage:  "will extract an archive containing multiple artifacts after it is deployed to Artifactory, while maintaining the archive's file structure",
-			EnvVar: "PLUGIN_EXPLODE",
-		},
-		cli.BoolTFlag{
-			Name:   "flat",
-			Usage:  "artifacts are uploaded to the exact target path specified and their hierarchy in the source file system is ignored",
-			EnvVar: "PLUGIN_FLAT",
-		},
-		cli.BoolFlag{
-			Name:   "include-dirs",
-			Usage:  "source path applies to bottom-chain directories and not only to files. Bottom-chain directories are either empty or do not include other directories that match the source path",
-			EnvVar: "PLUGIN_INCLUDE_DIRS",
-		},
 		cli.StringFlag{
-			Name:     "path",
-			Usage:    "Where to upload artifacts to",
-			EnvVar:   "PLUGIN_PATH",
-			FilePath: ".artifactory_path",
+			Name:   "actions",
+			Usage:  "Actions to perform against artifactory",
+			EnvVar: "PLUGIN_ACTIONS",
+		},
+		cli.BoolFlag{
+			Name:   "debug",
+			Usage:  "Enable debug logging",
+			EnvVar: "PLUGIN_DEBUG",
 		},
 		cli.StringFlag{
 			Name:   "password",
@@ -52,23 +42,6 @@ func main() {
 			Name:   "apikey",
 			Usage:  "Artifactory API Key",
 			EnvVar: "ARTIFACTORY_APIKEY, PLUGIN_APIKEY",
-		},
-		cli.BoolTFlag{
-			Name:   "recursive",
-			Usage:  "artifacts are also collected from sub-folders of the source directory for upload.",
-			EnvVar: "PLUGIN_RECURSIVE",
-		},
-		cli.BoolFlag{
-			Name:   "regexp",
-			Usage:  "command will interpret the sources as a regular expression.",
-			EnvVar: "PLUGIN_REGEXP",
-		},
-		cli.StringSliceFlag{
-			Name: "sources",
-			Usage: "local file system path to artifacts which should be uploaded to " +
-				"Artifactory. You can specify multiple artifacts by using " +
-				"wildcards or a regular expression as designated by the --regexp command option.",
-			EnvVar: "PLUGIN_SOURCES",
 		},
 		cli.StringFlag{
 			Name:   "url",
@@ -94,25 +67,55 @@ func run(c *cli.Context) error {
 		"Revision": revision,
 	}).Info("Artifactory Drone Plugin Version")
 
+	if c.Bool("debug") {
+		logrus.SetLevel(logrus.DebugLevel)
+	}
+
+	actions, err := unmarshalActions(c.String("actions"))
+
 	plugin := Plugin{
-		Config: Config{
+		Actions: actions,
+		Config: artifactory.Config{
 			APIKey:   c.String("apikey"),
+			Debug:    c.Bool("debug"),
 			Password: c.String("password"),
 			URL:      c.String("url"),
 			Username: c.String("username"),
 		},
-		UploadArgs: UploadArgs{
-			Explode:     c.Bool("explode"),
-			Flat:        c.Bool("flat"),
-			IncludeDirs: c.Bool("include-dirs"),
-			Path:        strings.TrimSpace(c.String("path")),
-			Recursive:   c.Bool("recursive"),
-			Regexp:      c.Bool("regexp"),
-			Sources:     c.StringSlice("sources"),
-		},
 	}
 
-	err := plugin.Exec()
+	err = plugin.Exec()
 
 	return err
+}
+
+func unmarshalActions(rawJSON string) ([]Action, error) {
+	logrus.WithFields(logrus.Fields{
+		"raw-actions": rawJSON,
+	}).Debug()
+
+	bytes := []byte(rawJSON)
+	var actions []Action
+	err := json.Unmarshal(bytes, &actions)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var rawActions []json.RawMessage
+	err = json.Unmarshal(bytes, &rawActions)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for idx := range actions {
+		actions[idx].RawArguments = rawActions[idx]
+	}
+
+	logrus.WithFields(logrus.Fields{
+		"actions": actions,
+	}).Debug()
+
+	return actions, nil
 }
