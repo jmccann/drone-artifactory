@@ -11,7 +11,7 @@ import (
 type (
 	// Action to perform
 	Action struct {
-		Name         string          `json:"name"`
+		Name         string          `json:"action"`
 		RawArguments json.RawMessage `json:"args"`
 		Arguments    interface{}
 	}

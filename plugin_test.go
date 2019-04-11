@@ -20,7 +20,7 @@ func TestPlugin(t *testing.T) {
 			}
 			action := Action{
 				Name:         "upload",
-				RawArguments: []byte(`{"name":"upload","sources":["some/source"],"path":"some/path"}`),
+				RawArguments: []byte(`{"action":"upload","sources":["some/source"],"path":"some/path"}`),
 			}
 			err := parseArgs(&action)
 			g.Assert(err == nil).IsTrue(fmt.Sprintf("Failed to parse arguments: %s", err))
@@ -30,7 +30,7 @@ func TestPlugin(t *testing.T) {
 		g.It("should error on unsupported action", func() {
 			action := Action{
 				Name:         "bad-action",
-				RawArguments: []byte(`{"name":"bad-action","sources":["some/source"],"path":"some/path"}`),
+				RawArguments: []byte(`{"action":"bad-action","sources":["some/source"],"path":"some/path"}`),
 			}
 			err := parseArgs(&action)
 			g.Assert(err != nil).IsTrue("should have failed on unsupported action")
@@ -45,7 +45,7 @@ func TestPlugin(t *testing.T) {
 			}
 			action := Action{
 				Name:         "upload",
-				RawArguments: []byte(`{"name":"upload","sources":["some/source"],"path":"some/path","explode":true}`),
+				RawArguments: []byte(`{"action":"upload","sources":["some/source"],"path":"some/path","explode":true}`),
 			}
 			err := parseArgs(&action)
 			g.Assert(err == nil).IsTrue(fmt.Sprintf("Failed to parse arguments: %s", err))
@@ -58,7 +58,7 @@ func TestPlugin(t *testing.T) {
 			}
 			action := Action{
 				Name:         "delete",
-				RawArguments: []byte(`{"name":"delete","path":"some/path"}`),
+				RawArguments: []byte(`{"action":"delete","path":"some/path"}`),
 			}
 			err := parseArgs(&action)
 			g.Assert(err == nil).IsTrue(fmt.Sprintf("Failed to parse arguments: %s", err))
