@@ -9,7 +9,7 @@ image: jmccann/drone-artifactory
 ---
 
 The Artifactory plugin publishes artifacts to Artifactory.
-The below pipeline configuration demonstrates simple usage:
+The below pipeline configuration demonstrates complex usage:
 
 ```yaml
 pipeline:
@@ -29,6 +29,14 @@ pipeline:
           - dist/**/*.min.js
       - action: upload
         args_file: upload-args.json
+      - action: set-prop
+        props:
+          - name: commit_sha
+            value: ${DRONE_COMMIT}
+          - name: something
+            values:
+              - multiple
+              - values
 ```
 
 ## Params

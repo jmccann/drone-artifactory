@@ -73,6 +73,10 @@ func do(arti *artifactory.Artifactory, action Action) error {
 		return arti.Delete(action.Arguments.(artifactory.DeleteArgs))
 	}
 
+	if action.Name == "set-props" {
+		return arti.SetProps(action.Arguments.(artifactory.PropsArgs))
+	}
+
 	if action.Name == "upload" {
 		return arti.Upload(action.Arguments.(artifactory.UploadArgs))
 	}
@@ -102,6 +106,18 @@ func parseArgs(action *Action) error {
 
 		action.Arguments = deleteArgs
 		return deleteArgs.Validate()
+	}
+
+	if action.Name == "set-props" {
+		var propsArgs artifactory.PropsArgs
+		err = json.Unmarshal(args, &propsArgs)
+
+		if err != nil {
+			return err
+		}
+
+		action.Arguments = propsArgs
+		return propsArgs.Validate()
 	}
 
 	if action.Name == "upload" {
