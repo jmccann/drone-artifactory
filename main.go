@@ -73,6 +73,10 @@ func run(c *cli.Context) error {
 
 	actions, err := unmarshalActions(c.String("actions"))
 
+	if err != nil {
+		return err
+	}
+
 	plugin := Plugin{
 		Actions: actions,
 		Config: artifactory.Config{
