@@ -47,7 +47,6 @@ func (a Artifactory) Upload(args UploadArgs) error {
 		params.Flat = args.Flat
 		params.Retries = 3
 
-		// logrus.Infof("created some params:\n  common: %v\n  upload: %v", params.ArtifactoryCommonParams, params)
 		_, n, m, err := a.client.UploadFiles(params)
 		logrus.WithFields(logrus.Fields{
 			"Success": n,
