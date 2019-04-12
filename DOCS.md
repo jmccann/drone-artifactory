@@ -18,20 +18,6 @@ pipeline:
     username: JohnDoe
     password: abcd1234
     url: https://myarti.com/artifactory
-    path: libs-snapshot-local/${DRONE_TAG}
-    sources:
-      - target/*.jar
-      - target/*.war
-      - dist/**/*.min.js
-```
-
-```yaml
-pipeline:
-  artifactory:
-    image: jmccann/drone-artifactory:1
-    username: JohnDoe
-    password: abcd1234
-    url: https://myarti.com/artifactory
     actions:
       - action: delete
         path: libs-snapshot-local/${DRONE_TAG}/*
@@ -41,6 +27,8 @@ pipeline:
           - target/*.jar
           - target/*.war
           - dist/**/*.min.js
+      - action: upload
+        args_file: upload-args.json
 ```
 
 ## Params
@@ -51,6 +39,18 @@ You can override the default configuration with the following parameters:
 * `username` - Artifactory username
 * `apikey` - Artifactory ApiKey
 * `password` - Artifactory password (Not required if apikey is provided)
+* `actions` - List of actions and their params to perform against artifactory
+
+### Delete Params
+
+* `path` - Target path pattern to delete files from.  Value can also be pre-generated in
+prior step and written/read from `.artifactory_path` file.
+* `dryrun` - Pretend to delete but don't actually delete
+* `recursive` - Artifacts are also deleted from sub-folders of the source directory for upload.  Default: `true`
+* `args_file` - path to file to load arguments instead from a pregenerated JSON file
+
+### Upload Params
+
 * `sources` - List of files to upload
 * `path` - Target path to upload files to.  Value can also be pre-generated in
 prior step and written/read from `.artifactory_path` file.
@@ -59,6 +59,7 @@ prior step and written/read from `.artifactory_path` file.
 * `include_dirs` - Source path applies to bottom-chain directories and not only to files. Bottom-chain directories are either empty or do not include other directories that match the source path.  Default: `false`
 * `recursive` - Artifacts are also collected from sub-folders of the source directory for upload.  Default: `true`
 * `regexp` - Will interpret the sources as a regular expression.  Default: `false`
+* `args_file` - path to file to load arguments instead from a pregenerated JSON file
 
 All file paths must be relative to current project sources
 
@@ -77,9 +78,13 @@ pipeline:
 -   password: abcd1234
 +   secrets: [ artifactory_username, artifactory_password ]
     url: https://myarti.com/artifactory
-    path: libs-snapshot-local/${DRONE_TAG}
-    sources:
-      - target/*.jar
-      - target/*.war
-      - dist/**/*.min.js
+    actions:
+      - action: delete
+        path: libs-snapshot-local/${DRONE_TAG}/*
+      - action: upload
+        path: libs-snapshot-local/${DRONE_TAG}
+        sources:
+          - target/*.jar
+          - target/*.war
+          - dist/**/*.min.js
 ```

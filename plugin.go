@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/jmccann/drone-artifactory/artifactory"
@@ -11,9 +12,10 @@ import (
 type (
 	// Action to perform
 	Action struct {
-		Name         string `json:"action"`
-		RawArguments json.RawMessage
-		Arguments    interface{}
+		Name          string `json:"action"`
+		RawArguments  json.RawMessage
+		Arguments     interface{}
+		ArgumentsFile string `json:"args_file"`
 	}
 
 	// Plugin struct
@@ -79,9 +81,20 @@ func do(arti *artifactory.Artifactory, action Action) error {
 }
 
 func parseArgs(action *Action) error {
+	var err error
+	args := action.RawArguments
+
+	if action.ArgumentsFile != "" {
+		args, err = ioutil.ReadFile(action.ArgumentsFile)
+
+		if err != nil {
+			return err
+		}
+	}
+
 	if action.Name == "delete" {
 		var deleteArgs artifactory.DeleteArgs
-		err := json.Unmarshal(action.RawArguments, &deleteArgs)
+		err = json.Unmarshal(args, &deleteArgs)
 
 		if err != nil {
 			return err
@@ -93,7 +106,7 @@ func parseArgs(action *Action) error {
 
 	if action.Name == "upload" {
 		var uploadArgs artifactory.UploadArgs
-		err := json.Unmarshal(action.RawArguments, &uploadArgs)
+		err := json.Unmarshal(args, &uploadArgs)
 
 		if err != nil {
 			return err

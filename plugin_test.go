@@ -52,6 +52,22 @@ func TestPlugin(t *testing.T) {
 			g.Assert(action.Arguments).Equal(expectedArguments)
 		})
 
+		g.It("should parse upload arguments from file", func() {
+			expectedArguments := artifactory.UploadArgs{
+				DryRun:  true,
+				Path:    "file/path",
+				Sources: []string{"some/new/source"},
+			}
+			action := Action{
+				Name:          "upload",
+				RawArguments:  []byte(`{"action":"upload","args_file": "fixtures/upload-args.json"}`),
+				ArgumentsFile: "fixtures/upload-args.json",
+			}
+			err := parseArgs(&action)
+			g.Assert(err == nil).IsTrue(fmt.Sprintf("Failed to parse arguments: %s", err))
+			g.Assert(action.Arguments).Equal(expectedArguments)
+		})
+
 		g.It("should parse raw delete arguments", func() {
 			expectedArguments := artifactory.DeleteArgs{
 				Path: "some/path",

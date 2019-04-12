@@ -11,10 +11,10 @@ import (
 type (
 	// UploadArgs are arguments for an Upload
 	UploadArgs struct {
-		DryRun      bool
+		DryRun      bool `json:"dryrun"`
 		Explode     bool
 		Flat        bool
-		IncludeDirs bool
+		IncludeDirs bool `json:"include_dirs"`
 		Path        string
 		Recursive   bool
 		Regexp      bool

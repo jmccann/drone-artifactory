@@ -1,0 +1,5 @@
+{
+  "sources": ["some/new/source"],
+  "path": "file/path",
+  "dryrun": true
+}

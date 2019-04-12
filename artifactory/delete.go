@@ -12,7 +12,7 @@ import (
 type (
 	// DeleteArgs are arguments for Delete
 	DeleteArgs struct {
-		DryRun    bool
+		DryRun    bool `json:"dryrun"`
 		Path      string
 		Recursive bool
 	}
