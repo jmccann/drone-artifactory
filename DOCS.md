@@ -9,7 +9,7 @@ image: jmccann/drone-artifactory
 ---
 
 The Artifactory plugin publishes artifacts to Artifactory.
-The below pipeline configuration demonstrates complex usage:
+The below pipeline configuration demonstrates sample usage:
 
 ```yaml
 pipeline:
@@ -29,14 +29,6 @@ pipeline:
           - dist/**/*.min.js
       - action: upload
         args_file: upload-args.json
-      - action: set-prop
-        props:
-          - name: commit_sha
-            value: ${DRONE_COMMIT}
-          - name: something
-            values:
-              - multiple
-              - values
 ```
 
 ## Params
@@ -49,7 +41,14 @@ You can override the default configuration with the following parameters:
 * `password` - Artifactory password (Not required if apikey is provided)
 * `actions` - List of actions and their params to perform against artifactory
 
-### Delete Params
+### copy Params
+
+* `source` - file source in artifactory to copy file from
+* `target` - where to copy file to
+* `flat` - removes source file directory heirarchy
+* `recursive` - copy sub-directories from source as well
+
+### delete Params
 
 * `path` - Target path pattern to delete files from.  Value can also be pre-generated in
 prior step and written/read from `.artifactory_path` file.
@@ -57,7 +56,23 @@ prior step and written/read from `.artifactory_path` file.
 * `recursive` - Artifacts are also deleted from sub-folders of the source directory for upload.  Default: `true`
 * `args_file` - path to file to load arguments instead from a pregenerated JSON file
 
-### Upload Params
+### set-props Params
+
+* `path` - path of file(s) to set props on
+* `props` - props to set on file(s)
+
+```yaml
+- action: set-prop
+  props:
+    - name: commit_sha
+      value: ${DRONE_COMMIT}
+    - name: something
+      values:
+        - multiple
+        - values
+```
+
+### upload Params
 
 * `sources` - List of files to upload
 * `path` - Target path to upload files to.  Value can also be pre-generated in
