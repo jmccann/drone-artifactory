@@ -7,7 +7,6 @@ import (
 	"github.com/Sirupsen/logrus"
 
 	"github.com/jfrog/jfrog-client-go/artifactory/services"
-	"github.com/jfrog/jfrog-client-go/artifactory/services/utils"
 )
 
 type (
@@ -29,13 +28,12 @@ type (
 
 // SetProps on items in Artifactory
 func (a Artifactory) SetProps(args PropsArgs) error {
-	searchParams := services.NewSearchParams()
-	searchParams.ArtifactoryCommonParams = &utils.ArtifactoryCommonParams{
-		Pattern:   args.Path,
+	searchArgs := SearchArgs{
+		Path:      args.Path,
 		Recursive: args.Recursive,
 	}
 
-	resultItems, err := a.client.SearchFiles(searchParams)
+	resultItems, err := a.search(searchArgs)
 
 	if err != nil {
 		return err
