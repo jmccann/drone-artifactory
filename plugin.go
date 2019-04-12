@@ -69,6 +69,10 @@ func (p Plugin) Exec() error {
 }
 
 func do(arti *artifactory.Artifactory, action Action) error {
+	if action.Name == "copy" {
+		return arti.Copy(action.Arguments.(artifactory.CopyArgs))
+	}
+
 	if action.Name == "delete" {
 		return arti.Delete(action.Arguments.(artifactory.DeleteArgs))
 	}
@@ -94,6 +98,18 @@ func parseArgs(action *Action) error {
 		if err != nil {
 			return err
 		}
+	}
+
+	if action.Name == "copy" {
+		var copyArgs artifactory.CopyArgs
+		err = json.Unmarshal(args, &copyArgs)
+
+		if err != nil {
+			return err
+		}
+
+		action.Arguments = copyArgs
+		return copyArgs.Validate()
 	}
 
 	if action.Name == "delete" {
