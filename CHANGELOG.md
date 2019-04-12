@@ -1,3 +1,8 @@
+## 3.1
+
+* Added ability to `set-props` on files
+* Added ability to `copy` files
+
 ## 3.0
 
 * **BREAKING CHANGE**: Reworked plugin inputs to allow multiple actions
