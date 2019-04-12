@@ -14,7 +14,7 @@ The below pipeline configuration demonstrates simple usage:
 ```yaml
 pipeline:
   artifactory:
-    image: jmccann/drone-artifactory:1
+    image: jmccann/drone-artifactory:3
     username: JohnDoe
     password: abcd1234
     url: https://myarti.com/artifactory
@@ -73,7 +73,7 @@ Please see the [Drone documentation](http://docs.drone.io/manage-secrets/) to le
 ```diff
 pipeline:
   artifactory:
-    image: jmccann/drone-artifactory:1
+    image: jmccann/drone-artifactory:3
 -   username: JohnDoe
 -   password: abcd1234
 +   secrets: [ artifactory_username, artifactory_password ]
