@@ -15,8 +15,8 @@ type (
 
 // Validate the Config
 func (c Config) Validate() error {
-	if len(c.Username) == 0 {
-		return fmt.Errorf("No username provided")
+	if len(c.Username) == 0 && len(c.APIKey) == 0 {
+		return fmt.Errorf("No username or ApiKey provided")
 	}
 
 	if len(c.Password) == 0 && len(c.APIKey) == 0 {
