@@ -4,31 +4,24 @@ Drone plugin to publish artifacts from the build to [Artifactory](https://www.jf
 
 ## Build
 
-Build the binary with the following commands:
+Build the binary with the following command:
 
 ```sh
 go build
-go test
+```
+
+## Test
+
+Test the code with the following command:
+
+```sh
+go test -v -race ./...
 ```
 
 ## Docker
 
-[Drone CLI](http://docs.drone.io/cli-installation/) is required.
-
-Build the docker image with the following commands:
+Build the docker image with the following command:
 
 ```sh
-drone exec
 docker build -t jmccann/drone-artifactory .
-```
-
-## Usage
-
-Execute from the working directory:
-
-```sh
-docker run --rm \
-  jmccann/drone-artifactory --url https://myarti.com/artifactory \
-  --username JohnDoe --password abcd1234 \
-  --source *.go --path repo-key/path/to/target
 ```

@@ -45,7 +45,7 @@ You can override the default configuration with the following parameters:
 
 * `source` - file source in artifactory to copy file from
 * `target` - where to copy file to
-* `flat` - removes source file directory heirarchy
+* `flat` - removes source file directory hierarchy
 * `recursive` - copy sub-directories from source as well
 
 ### delete Params
