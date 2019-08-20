@@ -1,3 +1,7 @@
+## 3.2
+
+* Build docker image from alpine
+
 ## 3.1
 
 * Added ability to `set-props` on files
