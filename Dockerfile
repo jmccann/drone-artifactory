@@ -6,9 +6,9 @@
 # Build golang binary
 #
 
-FROM golang:1.12 AS builder
+FROM golang:1.12-alpine3.9 AS builder
 
-RUN apt update && apt install -y ca-certificates
+RUN apk add --no-cache build-base ca-certificates git
 
 RUN mkdir -p /tmp/drone-artifactory
 WORKDIR /tmp/drone-artifactory
@@ -26,7 +26,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo -o /go/bin/dro
 # Build docker image
 #
 
-FROM scratch
+FROM alpine:3.9
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /go/bin/drone-artifactory /bin/
