@@ -21,7 +21,7 @@ func TestDelete(t *testing.T) {
 			args.Path = ""
 			err := args.Validate()
 			g.Assert(err != nil).IsTrue()
-			g.Assert(err).Equal(fmt.Errorf("No path provided"))
+			g.Assert(err).Equal(fmt.Errorf("No path or spec file provided"))
 		})
 	})
 }
