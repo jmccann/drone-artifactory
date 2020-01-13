@@ -1,3 +1,11 @@
+## 3.3
+
+* Add ability to search/delete files using a spec file
+* Add ability to use plugin in Dry Run mode
+* Update go module dependencies
+* Update alpine docker image
+* Patch alpine docker image
+
 ## 3.2
 
 * Build docker image from alpine
