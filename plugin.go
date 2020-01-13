@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/jmccann/drone-artifactory/artifactory"
+	"github.com/sirupsen/logrus"
 )
 
 type (

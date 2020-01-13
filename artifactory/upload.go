@@ -3,15 +3,14 @@ package artifactory
 import (
 	"fmt"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/jfrog/jfrog-client-go/artifactory/services"
 	"github.com/jfrog/jfrog-client-go/artifactory/services/utils"
+	"github.com/sirupsen/logrus"
 )
 
 type (
 	// UploadArgs are arguments for an Upload
 	UploadArgs struct {
-		DryRun      bool `json:"dryrun"`
 		Explode     bool
 		Flat        bool
 		IncludeDirs bool `json:"include_dirs"`

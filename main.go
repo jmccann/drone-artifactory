@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/jmccann/drone-artifactory/artifactory"
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 
@@ -28,20 +28,25 @@ func main() {
 			Usage:  "Actions to perform against artifactory",
 			EnvVar: "PLUGIN_ACTIONS",
 		},
+		cli.StringFlag{
+			Name:   "apikey",
+			Usage:  "Artifactory API Key",
+			EnvVar: "ARTIFACTORY_APIKEY, PLUGIN_APIKEY",
+		},
 		cli.BoolFlag{
 			Name:   "debug",
 			Usage:  "Enable debug logging",
 			EnvVar: "PLUGIN_DEBUG",
 		},
+		cli.BoolFlag{
+			Name:   "dry-run",
+			Usage:  "Enable dry-run mode",
+			EnvVar: "PLUGIN_DRY_RUN",
+		},
 		cli.StringFlag{
 			Name:   "password",
 			Usage:  "Artifactory server password",
 			EnvVar: "ARTIFACTORY_PASSWORD,PLUGIN_PASSWORD",
-		},
-		cli.StringFlag{
-			Name:   "apikey",
-			Usage:  "Artifactory API Key",
-			EnvVar: "ARTIFACTORY_APIKEY, PLUGIN_APIKEY",
 		},
 		cli.StringFlag{
 			Name:   "url",
@@ -82,6 +87,7 @@ func run(c *cli.Context) error {
 		Config: artifactory.Config{
 			APIKey:   c.String("apikey"),
 			Debug:    c.Bool("debug"),
+			DryRun:   c.Bool("dry-run"),
 			Password: c.String("password"),
 			URL:      c.String("url"),
 			Username: c.String("username"),

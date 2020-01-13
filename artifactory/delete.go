@@ -3,7 +3,7 @@ package artifactory
 import (
 	"fmt"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 
 	"github.com/jfrog/jfrog-client-go/artifactory/services"
 	"github.com/jfrog/jfrog-client-go/artifactory/services/utils"
@@ -12,9 +12,9 @@ import (
 type (
 	// DeleteArgs are arguments for Delete
 	DeleteArgs struct {
-		DryRun    bool `json:"dryrun"`
 		Path      string
 		Recursive bool
+		SpecFile  string `json:"spec_file"`
 	}
 )
 
@@ -24,6 +24,13 @@ func (a Artifactory) Delete(args DeleteArgs) error {
 	params.ArtifactoryCommonParams = &utils.ArtifactoryCommonParams{
 		Pattern:   args.Path,
 		Recursive: args.Recursive,
+	}
+	if args.SpecFile != "" {
+		aql, err := AqlFromSpecFile(args.SpecFile)
+		if err != nil {
+			return err
+		}
+		params.ArtifactoryCommonParams.Aql = aql
 	}
 
 	pathsToDelete, err := a.client.GetPathsToDelete(params)
@@ -47,8 +54,8 @@ func (a Artifactory) Delete(args DeleteArgs) error {
 
 // Validate the delete arguments
 func (d DeleteArgs) Validate() error {
-	if len(d.Path) == 0 {
-		return fmt.Errorf("No path provided")
+	if len(d.Path) == 0 && len(d.SpecFile) == 0 {
+		return fmt.Errorf("No path or spec file provided")
 	}
 
 	return nil

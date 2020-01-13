@@ -7,6 +7,7 @@ type (
 	Config struct {
 		APIKey   string
 		Debug    bool
+		DryRun   bool
 		Password string
 		URL      string
 		Username string

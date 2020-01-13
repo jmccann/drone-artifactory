@@ -40,6 +40,7 @@ You can override the default configuration with the following parameters:
 * `apikey` - Artifactory ApiKey
 * `password` - Artifactory password (Not required if apikey is provided)
 * `actions` - List of actions and their params to perform against artifactory
+* `dry_run` - Perform actions in a dry run mode, not actually uploading/deleting files
 
 ### copy Params
 
@@ -52,7 +53,6 @@ You can override the default configuration with the following parameters:
 
 * `path` - Target path pattern to delete files from.  Value can also be pre-generated in
 prior step and written/read from `.artifactory_path` file.
-* `dryrun` - Pretend to delete but don't actually delete
 * `recursive` - Artifacts are also deleted from sub-folders of the source directory for upload.  Default: `true`
 * `args_file` - path to file to load arguments instead from a pregenerated JSON file
 

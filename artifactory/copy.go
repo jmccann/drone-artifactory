@@ -3,9 +3,9 @@ package artifactory
 import (
 	"fmt"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/jfrog/jfrog-client-go/artifactory/services"
 	"github.com/jfrog/jfrog-client-go/artifactory/services/utils"
+	"github.com/sirupsen/logrus"
 )
 
 type (

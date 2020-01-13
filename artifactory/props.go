@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 
 	"github.com/jfrog/jfrog-client-go/artifactory/services"
 )
@@ -12,7 +12,6 @@ import (
 type (
 	// PropsArgs are arguments for managing properties on files
 	PropsArgs struct {
-		DryRun    bool `json:"dryrun"`
 		Path      string
 		Recursive bool
 		Props     []Prop

@@ -54,7 +54,6 @@ func TestPlugin(t *testing.T) {
 
 		g.It("should parse upload arguments from file", func() {
 			expectedArguments := artifactory.UploadArgs{
-				DryRun:  true,
 				Path:    "file/path",
 				Sources: []string{"some/new/source"},
 			}

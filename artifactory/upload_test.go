@@ -34,7 +34,6 @@ func TestUpload(t *testing.T) {
 
 var (
 	u = UploadArgs{
-		DryRun:  true,
 		Path:    "thekey/with/path",
 		Sources: []string{"main.go", "fixtures/*"},
 	}

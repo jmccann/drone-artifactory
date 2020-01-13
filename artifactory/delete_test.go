@@ -28,7 +28,6 @@ func TestDelete(t *testing.T) {
 
 var (
 	d = DeleteArgs{
-		DryRun: true,
-		Path:   "thekey/with/path",
+		Path: "thekey/with/path",
 	}
 )

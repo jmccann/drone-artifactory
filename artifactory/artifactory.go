@@ -9,6 +9,7 @@ import (
 type (
 	// Artifactory client
 	Artifactory struct {
+		DryRun bool
 		client *artiClient.ArtifactoryServicesManager
 	}
 )
@@ -39,7 +40,7 @@ func New(c Config) (*Artifactory, error) {
 
 	serviceConfig, err := artiClient.NewConfigBuilder().
 		SetArtDetails(rtDetails).
-		SetDryRun(false).
+		SetDryRun(c.DryRun).
 		SetLogger(l).
 		Build()
 
