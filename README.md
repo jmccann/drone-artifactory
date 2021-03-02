@@ -1,6 +1,7 @@
 # drone-artifactory
 
 Drone plugin to publish artifacts from the build to [Artifactory](https://www.jfrog.com/artifactory/).
+For the usage information and a listing of the available options please take a look at [the docs](DOCS.md).
 
 ## Build
 
